@@ -1,0 +1,41 @@
+.cartItem{
+    width: 100%;
+    height: 100px;
+    background-color: #fff;
+    padding: 5px;
+    display: flex;
+    gap: 20px;
+    position: relative;
+}
+.img{
+    width: 150px;
+    height: 100%;
+    background-color: #000;
+}
+.title{
+    font-size: 16px;
+    color: #333;
+    text-transform: uppercase;
+}
+.size{
+    font-size: 14px;
+    color: #333;
+    text-transform: uppercase;
+}
+.price{
+    font-size: 14px;
+    color: #333;
+    text-transform: uppercase;
+}
+.remove{
+    cursor: pointer;
+    position: absolute;
+    right: 10px;
+    top: 5px;
+    height: 25px;
+    width: 25px;
+    img{
+        width: 100%;
+        height: 100%;
+    }
+}
