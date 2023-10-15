@@ -3,7 +3,7 @@ import styles from './ProductList.module.scss'
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
 import ProductItem from '../ProductItem/ProductItem';
-import { fetchAllProducts } from '../../store/ProductSlice';
+import { fetchAllProducts } from '../../store/productSlice';
 
 const ProductList = () => {
     const products = useSelector((state: RootState) => state.products.products)
