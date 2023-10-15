@@ -25,17 +25,7 @@
    justify-content: center;
    flex-direction: column;
    text-transform: uppercase;
-   &:nth-child(1){
-    &::after{
-        display: block;
-        content: '';
-        width: 90%;
-        height: 1px;
-        background-color: #000;
-        margin-top: 10px;
-
-    }
-   }
+   
     ul{
         display: flex;
         flex-direction: column;

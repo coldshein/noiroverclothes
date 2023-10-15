@@ -1,0 +1,99 @@
+.fullCard {
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 20px;
+}
+
+.inner {
+    display: flex;
+    gap: 50px;
+}
+.info{
+    width: 30%;
+}
+
+.title {
+    font-size: 24px;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+}
+
+.designer {
+    font-size: 18px;
+    text-transform: uppercase;
+}
+
+.type {
+    text-transform: uppercase;
+    font-size: 14px;
+}
+
+.photo_list {
+    width: 70%;
+    display: grid;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(3, 400px);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+
+    img {
+        max-width: 100%;
+        height: 100%;
+        width: 100%;
+        object-fit: contain;
+    }
+
+    img:nth-child(1) {
+        grid-area: first-photo;
+        grid-area: 1 / 1 / 2 / 3;
+    }
+
+    img:nth-child(2) {
+        grid-area: second-photo;
+        grid-area: 1 / 3 / 2 / 5;
+    }
+
+    img:nth-child(3) {
+        grid-area: third-photo;
+        grid-area: 2 / 1 / 3 / 5;
+    }
+
+    img:nth-child(4) {
+        grid-area: fourth-photo;
+        grid-area: 3 / 1 / 4 / 3;
+    }
+
+    img:nth-child(5) {
+        grid-area: fifth-photo;
+        grid-area: 3 / 3 / 4 / 5;
+    }
+
+
+}
+
+.photo_block {
+    width: 100%;
+    height: 100%;
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+}
+
+@media (max-width: 980px) {
+    .inner {
+        flex-direction: column;
+    }
+
+    .photo_list {
+        width: 100%;
+        grid-template-columns: 50% 50%;
+        grid-template-rows: 150px 200px 150px;
+    }
+    .info{
+        width: 100%;
+        margin-top: 30px;
+    }
+}

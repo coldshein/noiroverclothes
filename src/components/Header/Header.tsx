@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import { setOpenCart } from "../../store/cartSlice";
 import { setOpenBurger } from "../../store/burgerSlice";
+import { Link } from "react-router-dom";
 const Header = () => {
   const dispatch = useDispatch();
   const openCart = useSelector((state: RootState) => state.cart.openCart);
@@ -26,7 +27,7 @@ const Header = () => {
             </li>
           </ul>
         </nav>
-        <div className={styles.logo}>noiroverclothes</div>
+        <Link to='/products' className={styles.logo}>noiroverclothes</Link>
         <nav>
           <ul>
             <li>search</li>
