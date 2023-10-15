@@ -1,15 +1,14 @@
-import React from "react";
 import styles from "./Burger.module.scss";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import { setOpenCart } from "../../store/cartSlice";
 const Burger = () => {
-    const dispatch = useDispatch();
-    const openBurger = useSelector((state:RootState) => state.burger.openBurger )
-    const openCart = useSelector((state: RootState) => state.cart.openCart )
+  const dispatch = useDispatch();
+  const openBurger = useSelector((state: RootState) => state.burger.openBurger);
+  const openCart = useSelector((state: RootState) => state.cart.openCart);
   return (
-    <div className={`${styles.modal} ${openBurger ? styles.active : ''}`}>
+    <div className={`${styles.modal} ${openBurger ? styles.active : ""}`}>
       <nav className={styles.nav}>
         <ul>
           <li>
