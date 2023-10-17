@@ -7,6 +7,7 @@
     width: 100%;
     background-color: rgba(0, 0, 0, 0.7);
     padding: 20px;
+    backdrop-filter: blur(5px);
     &:hover{
         .img{
             filter: brightness(100%);
@@ -15,7 +16,6 @@
 }
 .img{
     width: 100%;
-    height: 250px;
     img{
         width: 100%;
         height: 100%;
@@ -35,6 +35,14 @@
     text-align: center;
 
 }
+@media (max-width:1600px) {
+    .title{
+        font-size: 12px;
+    }
+    .productItem{
+        padding: 10px;
+    }
+}
 
 @media (max-width:980px) {
     .title{
@@ -48,9 +56,7 @@
         height: auto;
         margin-bottom: 5px;
     }
-    .productItem{
-        padding: 10px;
-    }
+    
 }
 @media (max-width:420px) {
     .img{

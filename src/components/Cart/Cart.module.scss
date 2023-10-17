@@ -45,7 +45,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 40px;
+    width: 30px;
     height: 30px;
     div{
         position: absolute;
@@ -63,6 +63,7 @@
 
 @media (max-width:980px) {
     .cart{
+        padding: 10px;
         width: 100%;
         background-color: rgba(0, 0, 0, 0.9);
         border-left: none;

@@ -1,5 +1,5 @@
 .productList{
-    width: 100%;
+    width: 80%;
 }
 .list{
     width: 100%;
@@ -14,6 +14,9 @@ a{
 }
 
 @media (max-width:980px) {
+  .productList{
+    width: 100%;
+  }
     .list{
         grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
         padding: 0;

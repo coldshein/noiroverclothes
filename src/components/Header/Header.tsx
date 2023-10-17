@@ -14,6 +14,14 @@ const Header = () => {
   return (
     <header>
       <div className={styles.inner}>
+        <div
+          className={`${styles.burger} ${openBurger ? styles.active : ""}`}
+          onClick={handleBurger}
+        >
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
         <nav>
           <ul>
             <li>
@@ -27,20 +35,18 @@ const Header = () => {
             </li>
           </ul>
         </nav>
-        <Link to='/products' className={styles.logo}>noiroverclothes</Link>
+        <Link to="/products" className={styles.logo}>
+          noiroverclothes
+        </Link>
         <nav>
           <ul>
             <li>search</li>
             <li onClick={() => dispatch(setOpenCart(openCart))}>cart</li>
           </ul>
         </nav>
-        <div
-          className={`${styles.burger} ${openBurger ? styles.active : ""}`}
-          onClick={handleBurger}
-        >
-          <div></div>
-          <div></div>
-          <div></div>
+
+        <div className={styles.cart} onClick={() => dispatch(setOpenCart(openCart))}>
+          <img src="/public/assets/cart.svg" alt="" />
         </div>
       </div>
     </header>

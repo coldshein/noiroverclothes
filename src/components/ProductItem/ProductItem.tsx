@@ -8,6 +8,9 @@ type productItemState = {
 }
 
 const ProductItem:React.FC<productItemState> = ({title, price, imageUrl}) => {
+    if(!imageUrl){
+        return <h1>...</h1>
+    }
     return ( 
         <div className={styles.productItem}>
             <div className={styles.img}>

@@ -12,7 +12,6 @@ const ProductList = () => {
   React.useEffect(() => {
     dispatch(fetchAllProducts() as any);
   }, []);
-  console.log(products);
   return (
     <section className={styles.productList}>
       <div className={styles.list}>
