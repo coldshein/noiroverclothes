@@ -68,7 +68,7 @@ export const fetchAllDesigners = createAsyncThunk<string[]>(
       );
       const designers = Array.from(designer);
       dispatch(setDesigners(designers))
-      return designer;
+      return designers;
     } catch (error) {
       console.error(error);
       throw error;

@@ -32,6 +32,9 @@ const FullCard = () => {
   React.useEffect(() => {
     fetchOneProduct(id);
   }, []);
+  if(!fullCard){
+    return <>Loading...</>
+  }
 
   return (
     <section className={styles.fullCard}>
