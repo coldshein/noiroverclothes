@@ -9,7 +9,7 @@ const CartItem = () => {
         <div className={styles.price}>130.00$</div>
       </div>
       <div className={styles.remove}>
-        <img src="./public/assets/remove.svg" alt="" />
+        <img src="./assets/remove.svg" alt="" />
       </div>
     </div>
   );

@@ -46,7 +46,7 @@ const Header = () => {
         </nav>
 
         <div className={styles.cart} onClick={() => dispatch(setOpenCart(openCart))}>
-          <img src="/public/assets/cart.svg" alt="" />
+          <img src="./assets/cart.svg" alt="" />
         </div>
       </div>
     </header>
