@@ -10,6 +10,9 @@ const Header = () => {
   const openBurger = useSelector((state: RootState) => state.burger.openBurger);
   const handleBurger = () => {
     dispatch(setOpenBurger(!openBurger));
+    return () => {
+      dispatch(setOpenBurger(!false))
+    }
   };
   return (
     <header>
