@@ -1,5 +1,22 @@
 .productList{
-    width: 80%;
+    width: 100%;
+}
+.options{
+  width: 100%;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.inner{
+  display: flex;
+  width: 100%;
+  gap: 20px;
+  height: 100%;
+  justify-content: space-between;
+}
+.block{
+  width: 100%;
 }
 .list{
     width: 100%;

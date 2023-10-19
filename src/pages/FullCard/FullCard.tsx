@@ -2,6 +2,12 @@ import { useParams } from "react-router-dom";
 import styles from "./FullCard.module.scss";
 import React from "react";
 import axios from "axios";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import "swiper/css/scrollbar";
 
 export interface IFullCard {
   id: string;
@@ -32,8 +38,8 @@ const FullCard = () => {
   React.useEffect(() => {
     fetchOneProduct(id);
   }, []);
-  if(!fullCard){
-    return <>Loading...</>
+  if (!fullCard) {
+    return <>Loading...</>;
   }
 
   return (
@@ -43,16 +49,22 @@ const FullCard = () => {
           <div>Please wait...</div>
         ) : (
           <>
-            <div
-              className={
-                fullCard.imageUrl.length === 1
-                  ? styles.photo_block
-                  : styles.photo_list
-              }
-            >
-              {fullCard.imageUrl.map((url, index) => (
-                <img key={index} src={url} alt={fullCard.title} />
-              ))}
+            <div className={styles.photo}>
+              <Swiper
+                pagination={{
+                  type: "fraction",
+                }}
+                spaceBetween={100}
+                navigation={true}
+                modules={[Pagination, Navigation]}
+                className="mySwiper"
+              >
+                {fullCard.imageUrl.map((item) => (
+                  <SwiperSlide className={styles.swiperSlide}>
+                    <img src={item} alt="" />
+                  </SwiperSlide>
+                ))}
+              </Swiper>
             </div>
             <div className={styles.info}>
               <div className={styles.infoInner}>

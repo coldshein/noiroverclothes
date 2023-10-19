@@ -19,6 +19,8 @@ const Cart = () => {
       <div className={styles.list}>
         <CartItem/>
       </div>
+      <button className={styles.btn}>checkout
+      </button>
     </div>
   );
 };

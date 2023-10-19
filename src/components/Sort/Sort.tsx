@@ -14,17 +14,29 @@ export const list: SortItem[] = [
 ];
 
 const Sort = () => {
-  const [sort, setSort] = React.useState(false);
+  const [open, setOpen] = React.useState(false);
+  const sortRef = React.useRef<HTMLDivElement>(null);
+  React.useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (sortRef.current && !event.composedPath().includes(sortRef.current)) {
+        setOpen(false);
+      }
+    };
+    document.body.addEventListener("click", handleClickOutside);
+    return () => {
+      document.body.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
 
   return (
-    <div className={styles.sort}>
+    <div className={styles.sort} ref={sortRef}>
       <div className={styles.inner}>
-        <div className={styles.title} onClick={() => setSort(!sort)}>
+        <div className={styles.title} onClick={() => setOpen(!open)}>
           <img src="./assets/sort.svg" alt="" /> Sort by:{" "}
           <div className={styles.activeOption}>Newest</div>
         </div>
       </div>
-      {!sort && (
+      {open && (
         <div className={styles.sortList}>
           <ul>
             {list.map((item) => (

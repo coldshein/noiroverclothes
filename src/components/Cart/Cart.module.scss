@@ -1,5 +1,8 @@
 .cart{
     position: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     top: 0;
     right: 0;
     height: 100%;
@@ -56,9 +59,19 @@
     }
 }
 .list{
+    margin: 10px 0;
     display: flex;
     flex-direction: column;
     padding: 20px 0;
+    height: 80%;
+}
+.btn{
+    width: 100%;
+    padding: 20px;
+    font-size: 16px;
+    text-transform: uppercase;
+    font-weight: 700;
+    background-color: #06a700;
 }
 
 @media (max-width:980px) {
@@ -67,5 +80,8 @@
         width: 100%;
         background-color: rgba(0, 0, 0, 0.9);
         border-left: none;
+    }
+    .list{
+        background-color: #fff;
     }
 }
