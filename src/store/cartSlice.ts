@@ -35,6 +35,7 @@ export const postCartItem = createAsyncThunk<CartItemType, CartItemType>(
     }
   }
 );
+
 export const fetchCartItems = createAsyncThunk<CartItemType>(
   "cartItems/fetchCartItems",
   async (_, { dispatch }) => {
@@ -49,6 +50,19 @@ export const fetchCartItems = createAsyncThunk<CartItemType>(
     }
   }
 );
+
+export const removeCartItem = createAsyncThunk<string, string>(
+    "cartItems/removeCartItem",
+    async (id) => {
+      try {
+        const { data } = await axios.delete(`https://650464d5c8869921ae24f99f.mockapi.io/cart/${id}`);
+        return data;
+      } catch (error) {
+        throw error;
+      }
+    }
+  );
+
 export const cartSlice = createSlice({
   name: "cart",
   initialState,

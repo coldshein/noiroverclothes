@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import styles from "./CartItem.module.scss";
-import { removeItem } from "../../store/cartSlice";
+import { removeCartItem, removeItem } from "../../store/cartSlice";
 interface ICartItem {
   title: string;
   price: number;
@@ -10,6 +10,11 @@ interface ICartItem {
 }
 const CartItem:React.FC<ICartItem> = ({title, price, size, imageUrl, id}) => {
   const dispatch = useDispatch();
+  
+  const onClickRemove = () => {
+    dispatch(removeItem(id))
+    dispatch(removeCartItem(id) as any)
+  }
 
 
   return (
@@ -22,7 +27,7 @@ const CartItem:React.FC<ICartItem> = ({title, price, size, imageUrl, id}) => {
         <div className={styles.size}>size: {size}</div>
         <div className={styles.price}>{price}.00$</div>
       </div>
-      <div className={styles.remove} onClick={() => dispatch(removeItem(id))}>
+      <div className={styles.remove} onClick={onClickRemove}>
         <img src="/assets/remove.svg" alt="" />
       </div>
     </div>
