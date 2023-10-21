@@ -64,6 +64,8 @@
     flex-direction: column;
     padding: 20px 0;
     height: 80%;
+    overflow-y: scroll;
+    gap: 10px;
 }
 .btn{
     width: 100%;
@@ -72,6 +74,13 @@
     text-transform: uppercase;
     font-weight: 700;
     background-color: #06a700;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    transition: all .2s ease-in-out;
+    &:hover{
+        background-color: #0f830b;
+    }
 }
 
 @media (max-width:980px) {

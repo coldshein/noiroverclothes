@@ -8,12 +8,18 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
+import { useDispatch } from "react-redux";
+import {
+  addItem,
+  postCartItem,
+  setOpenCart,
+} from "../../store/cartSlice";
 
 export interface IFullCard {
   id: string;
   title: string;
   sex: string;
-  price: string;
+  price: number;
   brand: string;
   link: string;
   size: string[];
@@ -23,8 +29,10 @@ export interface IFullCard {
 }
 
 const FullCard = () => {
+  const dispatch = useDispatch();
   const [fullCard, setFullCard] = React.useState<IFullCard | undefined>();
   const [isLoading, setIsLoading] = React.useState(true);
+  const [size, setSize] = React.useState("");
   const { id } = useParams();
   const fetchOneProduct = async (id: string | undefined) => {
     try {
@@ -38,6 +46,28 @@ const FullCard = () => {
   React.useEffect(() => {
     fetchOneProduct(id);
   }, []);
+  const addToCart = () => {
+    if (fullCard) {
+      if (!size) {
+        alert("Please, choose your size");
+      } else {
+        const addedItem = {
+          price: fullCard.price,
+          id: fullCard.id,
+          title: fullCard.title,
+          size: size,
+          brand: fullCard.brand,
+          imageUrl: fullCard.imageUrl,
+        };
+        dispatch(addItem(addedItem));
+        dispatch(postCartItem(addedItem) as any)
+        dispatch(setOpenCart(!true));
+      }
+    }
+  };
+  const handleSize = (size: any) => {
+    setSize(size);
+  };
   if (!fullCard) {
     return <>Loading...</>;
   }
@@ -73,8 +103,24 @@ const FullCard = () => {
                 <h3 className={styles.type}>
                   type: {`${fullCard.sex}'s ${fullCard.type}`}
                 </h3>
+                <div className={styles.sizes}>
+                  Size:
+                  <div className={styles.size}>
+                    {fullCard.size.map((item) => (
+                      <div
+                        key={item}
+                        className={` ${styles.size_item} ${
+                          size === item ? styles.active : ``
+                        }`}
+                        onClick={() => handleSize(item)}
+                      >
+                        {item}
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </div>
-              <button className={styles.btn}>add to cart</button>
+              <button className={styles.btn} onClick={addToCart}>add to cart</button>
             </div>
           </>
         )}

@@ -41,7 +41,7 @@ nav{
             &:hover{
                 &::after{
                     width: 100%;
-                    transform: translateX(-50%);
+                    left: 0;
                 }
             }
             a{

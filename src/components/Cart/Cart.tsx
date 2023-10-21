@@ -1,12 +1,17 @@
+import React from 'react'
 import styles from "./Cart.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store/store";
-import { setOpenCart } from "../../store/cartSlice";
+import { fetchCartItems, setOpenCart } from "../../store/cartSlice";
 import CartItem from "../CartItem/CartItem";
 
 const Cart = () => {
-    const openCart = useSelector((state: RootState) => state.cart.openCart)
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
+    const {openCart,items} = useSelector((state: RootState) => state.cart)
+
+    React.useEffect(() => {
+      dispatch(fetchCartItems() as any)
+    },[])
   return (
     <div className={`${styles.cart} ${openCart && styles.active}`}>
       <div className={styles.inner}>
@@ -17,7 +22,11 @@ const Cart = () => {
         </div>
       </div>
       <div className={styles.list}>
-        <CartItem/>
+       {
+        items.map((item) => <CartItem
+        key={item.id} title={item.title} price={item.price} size={item.size}
+        imageUrl={item.imageUrl} id={item.id}/> )
+       }
       </div>
       <button className={styles.btn}>checkout
       </button>
