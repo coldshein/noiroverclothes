@@ -76,6 +76,22 @@ export const fetchAllDesigners = createAsyncThunk<string[]>(
   }
 );
 
+export const fetchProductsBySex = createAsyncThunk<IProduct[], string>(
+  "products/fetchProductsBySex",
+  async (sex, { dispatch }) => {
+    try {
+      const { data } = await axios.get(
+        `https://650464d5c8869921ae24f99f.mockapi.io/items?sex=${sex}`
+      );
+      dispatch(setProducts(data));
+      return data;
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  }
+)
+
 const initialState: productState = {
   products: [],
   categories: [],

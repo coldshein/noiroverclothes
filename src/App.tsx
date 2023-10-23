@@ -9,7 +9,9 @@ function App() {
     <div className="app-container">
       <Routes>
         <Route path="/" element={<MainLayout />}>
-          <Route path="/products" element={<ProductList />} />
+          <Route path="/products" element={<ProductList />}>
+            <Route path="/products/:sex" element={<ProductList/>}/>
+          </Route>
           <Route path="/product/:link/:id" element={<FullCard />} />
         </Route>
       </Routes>

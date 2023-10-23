@@ -11,10 +11,10 @@ const Burger = () => {
       <nav className={styles.nav}>
         <ul>
           <li>
-            <Link to="/collection/men">man</Link>
+            <Link to="/products/men">man</Link>
           </li>
           <li>
-            <Link to="/collection/women">woman</Link>
+            <Link to="/products/women">woman</Link>
           </li>
           <li>
             <Link to="/designers">designers</Link>

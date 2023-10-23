@@ -32,7 +32,7 @@ const Sort = () => {
     <div className={styles.sort} ref={sortRef}>
       <div className={styles.inner}>
         <div className={styles.title} onClick={() => setOpen(!open)}>
-          <img src="./assets/sort.svg" alt="" /> Sort by:{" "}
+          <img src="/assets/sort.svg" alt="" /> Sort by:{" "}
           <div className={styles.activeOption}>Newest</div>
         </div>
       </div>

@@ -28,13 +28,13 @@ const Header = () => {
         <nav>
           <ul>
             <li>
-              <a href="">men</a>
+              <Link to="/products/men">men</Link>
             </li>
             <li>
-              <a href="">women</a>
+              <Link to="/products/women">women</Link>
             </li>
             <li>
-              <a href="">designers</a>
+              <Link to="/designers">designers</Link>
             </li>
           </ul>
         </nav>
