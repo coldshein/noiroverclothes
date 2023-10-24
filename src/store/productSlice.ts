@@ -15,10 +15,15 @@ export interface IProduct {
   imageUrl: string[];
 }
 
+export type DesignerType ={
+  items: string[],
+  loading: 'loading' | 'fullfiled' | 'rejected'
+}
+
 export interface productState {
   products: IProduct[];
   categories: string[];
-  designers: string[];
+  designers: DesignerType;
 }
 
 export const fetchAllProducts = createAsyncThunk<IProduct[]>(
@@ -95,7 +100,10 @@ export const fetchProductsBySex = createAsyncThunk<IProduct[], string>(
 const initialState: productState = {
   products: [],
   categories: [],
-  designers: [],
+  designers: {
+    items: [],
+    loading: 'loading',
+  },
 };
 
 export const productSlice = createSlice({
@@ -109,9 +117,19 @@ export const productSlice = createSlice({
       state.categories = action.payload;
     },
     setDesigners: (state, action: PayloadAction<string[]>) => {
-      state.designers = action.payload;
+      state.designers.items = action.payload;
     },
   },
+  extraReducers: (builder) => {
+    builder.addCase(fetchAllCategories.pending, (state) => {
+      state.designers.items = [];
+      state.designers.loading = 'loading';
+    }),
+    builder.addCase(fetchAllDesigners.fulfilled, (state,action) => {
+      state.designers.items = action.payload;
+      state.designers.loading = 'fullfiled';
+    })
+  }
 });
 
 export const { setProducts, setCategories, setDesigners } = productSlice.actions;

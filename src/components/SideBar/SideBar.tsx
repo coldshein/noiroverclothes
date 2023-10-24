@@ -15,14 +15,14 @@ const SideBar = () => {
     
     return ( 
         <div className={styles.sidebar}>
-            <h5 className={styles.title}>all categories</h5>
+            <h5 className={styles.title}>all categories</h5>yar
             <ul>
               {categories.map((item) => <li key={item}>{item}</li> )}
             </ul>
             <h5 className={styles.title}>all designers</h5>
             <ul>
                {
-                designers.map((item) => <li key={item}>{item}</li> )
+                designers.items.map((item) => <li key={item}>{item}</li> )
                }
             </ul>
         </div>
