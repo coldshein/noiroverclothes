@@ -38,7 +38,7 @@ const Header = () => {
             </li>
           </ul>
         </nav>
-        <Link to="/products" className={styles.logo}>
+        <Link to="/" className={styles.logo}>
           noiroverclothes
         </Link>
         <nav>

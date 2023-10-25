@@ -14,14 +14,17 @@ export interface IProduct {
   category: string;
   imageUrl: string[];
 }
-
+export type ProductType = {
+  items: IProduct[],
+  loading: 'loading' | 'fullfiled' | 'rejected'
+}
 export type DesignerType ={
   items: string[],
   loading: 'loading' | 'fullfiled' | 'rejected'
 }
 
 export interface productState {
-  products: IProduct[];
+  products: ProductType;
   categories: string[];
   designers: DesignerType;
 }
@@ -98,7 +101,10 @@ export const fetchProductsBySex = createAsyncThunk<IProduct[], string>(
 )
 
 const initialState: productState = {
-  products: [],
+  products: {
+    items: [],
+    loading: 'loading'
+  },
   categories: [],
   designers: {
     items: [],
@@ -111,7 +117,7 @@ export const productSlice = createSlice({
   initialState,
   reducers: {
     setProducts: (state, action: PayloadAction<IProduct[]>) => {
-      state.products = action.payload;
+      state.products.items = action.payload;
     },
     setCategories: (state, action: PayloadAction<string[]>) => {
       state.categories = action.payload;
@@ -128,6 +134,22 @@ export const productSlice = createSlice({
     builder.addCase(fetchAllDesigners.fulfilled, (state,action) => {
       state.designers.items = action.payload;
       state.designers.loading = 'fullfiled';
+    }),
+    builder.addCase(fetchAllProducts.pending, (state) => {
+      state.products.items = [];
+      state.products.loading = 'loading';
+    }),
+    builder.addCase(fetchAllProducts.fulfilled, (state,action) => {
+      state.products.items = action.payload;
+      state.products.loading = 'fullfiled';
+    }),
+    builder.addCase(fetchProductsBySex.pending, (state) => {
+      state.products.items = [];
+      state.products.loading = 'loading';
+    }),
+    builder.addCase(fetchProductsBySex.fulfilled, (state,action) => {
+      state.products.items = action.payload;
+      state.products.loading = 'fullfiled';
     })
   }
 });

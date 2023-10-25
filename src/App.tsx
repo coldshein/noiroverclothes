@@ -4,12 +4,14 @@ import MainLayout from "./pages/MainLayout";
 import FullCard from "./pages/FullCard/FullCard";
 import ProductList from "./components/ProductList/ProductList";
 import Designers from "./pages/Designers/Designers";
+import Home from "./pages/Home/Home";
 
 function App() {
   return (
     <div className="app-container">
       <Routes>
         <Route path="/" element={<MainLayout />}>
+          <Route path="" element={<Home/>}/>
           <Route path="/products" element={<ProductList />}>
             <Route path="/products/:sex" element={<ProductList/>}/>
           </Route>
