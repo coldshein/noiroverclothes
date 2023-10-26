@@ -20,10 +20,11 @@ const ProductList = () => {
   const products = useSelector((state: RootState) => state.products.products);
   const dispatch = useDispatch();
   React.useEffect(() => {
-    if (sex) {
-      dispatch(fetchProductsBySex(sex) as any);
-    } else {
+    if (!sex) {
       dispatch(fetchAllProducts() as any);
+      
+    } else {
+      dispatch(fetchProductsBySex(sex) as any);
     }
   }, [sex]);
   return (
