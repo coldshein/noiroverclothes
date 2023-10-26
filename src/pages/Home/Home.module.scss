@@ -10,6 +10,9 @@
     height: 100%;
     width: 100%;
     display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
 }
 
 .block {
@@ -42,19 +45,40 @@
 .img {
     img {
         width: 100%;
-        height: 100%;
+        
         transition: all .2s ease-in-out;
+        object-fit: cover;
     }
 
+}
+.all{
+    position: relative;
+    padding: 50px;
+    width: 100%;
+    background-color: #ffffff5b;
+    transition: all .1s ease-in-out;
+    &:hover{
+        
+    background-color: #ffffff3a;
+    }
 }
 
 @media (max-width:980px) {
     .inner {
-        flex-direction: column;
-        padding: 10px;
+        padding: 5px;
     }
 
     .block {
         width: 100%;
+        &:hover{
+            .img{
+                img{
+                    filter: blur(0px);
+                }
+            }
+        }
+    }
+    .img{
+        height: 300px;
     }
 }

@@ -25,9 +25,7 @@
     z-index: 1;
   }
 }
-#root{
-  height: 100%;
-}
+
 body{
   position: relative;
   z-index: 2;

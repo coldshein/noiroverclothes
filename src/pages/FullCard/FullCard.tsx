@@ -14,6 +14,8 @@ import {
   postCartItem,
   setOpenCart,
 } from "../../store/cartSlice";
+import {motion} from 'framer-motion'
+import Loader from "../../components/Burger/Loader/Loader";
 
 export interface IFullCard {
   id: string;
@@ -68,15 +70,18 @@ const FullCard = () => {
   const handleSize = (size: any) => {
     setSize(size);
   };
-  if (!fullCard) {
-    return <>Loading...</>;
+  if(!fullCard){
+    return  <Loader/>
   }
 
   return (
-    <section className={styles.fullCard}>
+    <motion.section className={styles.fullCard}
+    initial={{opacity: 0}}
+    animate={{opacity: 1} }
+    exit={{opacity: 0, transition: {duration: 0.4}}}>
       <div className={styles.inner}>
         {isLoading ? (
-          <div>Please wait...</div>
+          <Loader/>
         ) : (
           <>
             <div className={styles.photo}>
@@ -90,7 +95,7 @@ const FullCard = () => {
                 className="mySwiper"
               >
                 {fullCard.imageUrl.map((item) => (
-                  <SwiperSlide className={styles.swiperSlide}>
+                  <SwiperSlide key={item} className={styles.swiperSlide}>
                     <img src={item} alt="" />
                   </SwiperSlide>
                 ))}
@@ -125,7 +130,7 @@ const FullCard = () => {
           </>
         )}
       </div>
-    </section>
+    </motion.section>
   );
 };
 

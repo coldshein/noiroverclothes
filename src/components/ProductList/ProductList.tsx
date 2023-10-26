@@ -8,6 +8,8 @@ import { Link, useParams } from "react-router-dom";
 import Sort from "../Sort/Sort";
 import Filter from "../Filter/Filter";
 import SideBar from "../SideBar/SideBar";
+import Loader from "../Burger/Loader/Loader";
+import {motion} from 'framer-motion'
 
 export type ParamsType = {
   sex: string;
@@ -25,11 +27,14 @@ const ProductList = () => {
     }
   }, [sex]);
   return (
-    <section className={styles.productList}>
+    <motion.section className={styles.productList}
+    initial={{opacity: 0}}
+    animate={{opacity: 1} }
+    exit={{opacity: 0, transition: {duration: 0.4}}}>
       <div className={styles.inner}>
         <SideBar />
         {products.loading === "loading" ? (
-          <img src="/assets/preload.gif" alt="" className={styles.preload} />
+         <Loader/>
         ) : (
           <div className={styles.block}>
             <div className={styles.options}>
@@ -50,7 +55,7 @@ const ProductList = () => {
           </div>
         )}
       </div>
-    </section>
+    </motion.section>
   );
 };
 

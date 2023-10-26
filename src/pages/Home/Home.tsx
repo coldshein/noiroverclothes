@@ -1,8 +1,13 @@
 import { Link } from 'react-router-dom';
 import styles from './Home.module.scss'
+import { motion } from 'framer-motion';
+
 const Home = () => {
     return ( 
-        <main className={styles.home}>
+        <motion.main className={styles.home}
+        initial={{opacity: 0}}
+        animate={{opacity: 1}}
+        exit={{opacity: 0, transition: {duration: 0.4}}}>
             <div className={styles.inner}>
                 <Link to='/products/women' className={styles.block}>
                     <div className={styles.img}>
@@ -16,8 +21,11 @@ const Home = () => {
                     </div>
                     <h2 className={styles.title}>menswear</h2>
                 </Link>
+                <Link to='/products' className={styles.all}>
+                    <h2 className={styles.title}>view all</h2>
+                </Link>
             </div>
-        </main>
+        </motion.main>
      );
 }
  
