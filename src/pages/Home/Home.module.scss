@@ -66,6 +66,12 @@
 @media (max-width:980px) {
     .inner {
         padding: 5px;
+        display: flex;
+        flex-direction: column;
+        padding: 0;
+    }
+    .title{
+        font-size: 18px;
     }
 
     .block {
@@ -80,5 +86,8 @@
     }
     .img{
         height: 300px;
+        img{
+            height: 100%;
+        }
     }
 }

@@ -6,8 +6,8 @@ const Home = () => {
     return ( 
         <motion.main className={styles.home}
         initial={{opacity: 0}}
-        animate={{opacity: 1}}
-        exit={{opacity: 0, transition: {duration: 0.4}}}>
+        animate={{opacity: 1, transition: {duration: 0.7}}}
+        exit={{opacity: 0, transition: {duration: 0.7}}}>
             <div className={styles.inner}>
                 <Link to='/products/women' className={styles.block}>
                     <div className={styles.img}>
