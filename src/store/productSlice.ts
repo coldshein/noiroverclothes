@@ -16,16 +16,20 @@ export interface IProduct {
 }
 export type ProductType = {
   items: IProduct[],
-  loading: 'loading' | 'fullfiled' | 'rejected'
+  loading: 'loading' | 'fulfilled' | 'rejected'
 }
 export type DesignerType ={
   items: string[],
-  loading: 'loading' | 'fullfiled' | 'rejected'
+  loading: 'loading' | 'fulfilled' | 'rejected'
+}
+export type CategoriesType = {
+  items: string[],
+  loading: 'loading' | 'fulfilled' | 'rejected'
 }
 
 export interface productState {
   products: ProductType;
-  categories: string[];
+  categories: CategoriesType;
   designers: DesignerType;
 }
 
@@ -39,7 +43,6 @@ export const fetchAllProducts = createAsyncThunk<IProduct[]>(
       dispatch(setProducts(data));
       return data;
     } catch (error) {
-      console.error(error);
       throw error;
     }
   }
@@ -58,11 +61,23 @@ export const fetchAllCategories = createAsyncThunk<string[]>(
       dispatch(setCategories(categories));
       return categories;
     } catch (error) {
-      console.error(error);
       throw error;
     }
   }
 );
+
+export const fetchProductsByCategories = createAsyncThunk<IProduct[], string>(
+  "products/fetchProductsByCategories",
+  async (category, {dispatch}) => {
+    try {
+      const {data} = await axios.get(`https://650464d5c8869921ae24f99f.mockapi.io/items?category=${category}`)
+      dispatch(setProducts(data))
+      return data
+    } catch (error) {
+      throw error;      
+    }
+  }
+)
 
 export const fetchAllDesigners = createAsyncThunk<string[]>(
   "products/fetchAllDesigners",
@@ -78,11 +93,23 @@ export const fetchAllDesigners = createAsyncThunk<string[]>(
       dispatch(setDesigners(designers))
       return designers;
     } catch (error) {
-      console.error(error);
       throw error;
     }
   }
 );
+
+export const fetchProductsByDesigner = createAsyncThunk<IProduct[], string>(
+  "products/fetchProductsByDesigner",
+  async (designer, {dispatch}) => {
+    try {
+      const {data} = await axios.get(`https://650464d5c8869921ae24f99f.mockapi.io/items?brand=${designer}`);
+    dispatch(setProducts(data));
+    return data;
+    } catch (error) {
+      throw error;
+    }
+  }
+)
 
 export const fetchProductsBySex = createAsyncThunk<IProduct[], string>(
   "products/fetchProductsBySex",
@@ -105,7 +132,10 @@ const initialState: productState = {
     items: [],
     loading: 'loading'
   },
-  categories: [],
+  categories: {
+    items: [],
+    loading: 'loading',
+  },
   designers: {
     items: [],
     loading: 'loading',
@@ -120,20 +150,20 @@ export const productSlice = createSlice({
       state.products.items = action.payload;
     },
     setCategories: (state, action: PayloadAction<string[]>) => {
-      state.categories = action.payload;
+      state.categories.items = action.payload;
     },
     setDesigners: (state, action: PayloadAction<string[]>) => {
       state.designers.items = action.payload;
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(fetchAllCategories.pending, (state) => {
+    builder.addCase(fetchAllDesigners.pending, (state) => {
       state.designers.items = [];
       state.designers.loading = 'loading';
     }),
     builder.addCase(fetchAllDesigners.fulfilled, (state,action) => {
       state.designers.items = action.payload;
-      state.designers.loading = 'fullfiled';
+      state.designers.loading = 'fulfilled';
     }),
     builder.addCase(fetchAllProducts.pending, (state) => {
       state.products.items = [];
@@ -141,7 +171,7 @@ export const productSlice = createSlice({
     }),
     builder.addCase(fetchAllProducts.fulfilled, (state,action) => {
       state.products.items = action.payload;
-      state.products.loading = 'fullfiled';
+      state.products.loading = 'fulfilled';
     }),
     builder.addCase(fetchProductsBySex.pending, (state) => {
       state.products.items = [];
@@ -149,7 +179,15 @@ export const productSlice = createSlice({
     }),
     builder.addCase(fetchProductsBySex.fulfilled, (state,action) => {
       state.products.items = action.payload;
-      state.products.loading = 'fullfiled';
+      state.products.loading = 'fulfilled';
+    }),
+    builder.addCase(fetchProductsByDesigner.pending, (state) => {
+      state.products.items = [];
+      state.products.loading = 'loading';
+    }),
+    builder.addCase(fetchProductsByDesigner.fulfilled, (state,action) => {
+      state.products.items = action.payload;
+      state.products.loading = 'fulfilled';
     })
   }
 });

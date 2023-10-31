@@ -17,10 +17,12 @@ function App() {
           <Route path="/" element={<MainLayout />}>
             <Route path="" element={<Home />} />
             <Route path="/products" element={<ProductList />}>
-              <Route path="/products/:sex" element={<ProductList />} />
+              <Route path="/products/:sex" element={<ProductList />}/>
             </Route>
             <Route path="/product/:link/:id" element={<FullCard />} />
             <Route path="/designers" element={<Designers />} />
+            <Route path="/designers/:designer" element={<ProductList />} />
+            <Route path="/categories/:category" element={<ProductList />} />
           </Route>
         </Routes>
       </div>

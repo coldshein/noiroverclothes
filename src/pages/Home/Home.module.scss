@@ -6,7 +6,7 @@
 }
 
 .inner {
-    padding: 20px;
+    padding: 0 20px;
     height: 100%;
     width: 100%;
     display: flex;
@@ -53,7 +53,7 @@
 }
 .all{
     position: relative;
-    padding: 50px;
+    padding: 40px;
     width: 100%;
     background-color: #ffffff5b;
     transition: all .1s ease-in-out;
