@@ -6,8 +6,8 @@ import { setOpenBurger } from "../../store/burgerSlice";
 import { Link } from "react-router-dom";
 const Header = () => {
   const dispatch = useDispatch();
-  const openCart = useSelector((state: RootState) => state.cart.openCart);
-  const openBurger = useSelector((state: RootState) => state.burger.openBurger);
+  const openCart = useSelector((state: RootState) => state.rootReducer.cart.openCart);
+  const openBurger = useSelector((state: RootState) => state.rootReducer.burger.openBurger);
   const handleBurger = () => {
     dispatch(setOpenBurger(!openBurger));
     return () => {

@@ -7,7 +7,7 @@ import { fetchAllDesigners } from "../../store/productSlice";
 
 const Designers = () => {
   const dispatch = useDispatch();
-  const designers = useSelector((state: RootState) => state.products.designers);
+  const designers = useSelector((state: RootState) => state.rootReducer.products.designers);
   React.useEffect(() => {
     dispatch(fetchAllDesigners() as any);
   }, []);

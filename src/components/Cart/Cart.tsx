@@ -8,7 +8,7 @@ import EmptyCart from "../EmptyCart/EmptyCart";
 
 const Cart = () => {
   const dispatch = useDispatch();
-  const { openCart, items } = useSelector((state: RootState) => state.cart);
+  const { openCart, items } = useSelector((state: RootState) => state.rootReducer.cart);
 
   React.useEffect(() => {
     dispatch(fetchCartItems() as any);

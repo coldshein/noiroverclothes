@@ -5,7 +5,7 @@ import { RootState } from "../../store/store";
 
 const Burger = () => {
 
-  const openBurger = useSelector((state: RootState) => state.burger.openBurger);
+  const openBurger = useSelector((state: RootState) => state.rootReducer.burger.openBurger);
   return (
     <div className={`${styles.modal} ${openBurger ? styles.active : ""}`}>
       <nav className={styles.nav}>

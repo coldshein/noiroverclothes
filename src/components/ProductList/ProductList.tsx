@@ -13,7 +13,7 @@ import { Link, useParams } from "react-router-dom";
 import Sort from "../Sort/Sort";
 import Filter from "../Filter/Filter";
 import SideBar from "../SideBar/SideBar";
-import Loader from "../Burger/Loader/Loader";
+import Loader from "../Loader/Loader";
 import { motion } from "framer-motion";
 
 export type ParamsType = {
@@ -24,19 +24,18 @@ export type ParamsType = {
 
 const ProductList = () => {
   const { sex, designer, category } = useParams<ParamsType>();
-  const products = useSelector((state: RootState) => state.products.products);
-  const dispatch = useDispatch();
+  const products = useSelector((state: RootState) => state.rootReducer.products.products);
+  const dispatch = useDispatch<any>();
   React.useEffect(() => {
     if (designer) {
-      dispatch(fetchProductsByDesigner(designer) as any);
+      dispatch(fetchProductsByDesigner(designer));
     } else if (sex) {
-      dispatch(fetchProductsBySex(sex) as any);
+      dispatch(fetchProductsBySex(sex));
     } else if (category) {
-      dispatch(fetchProductsByCategories(category) as any);
+      dispatch(fetchProductsByCategories(category));
     } else {
-      dispatch(fetchAllProducts() as any);
+      dispatch(fetchAllProducts());
     }
-    console.log(designer);
   }, [sex, designer, category]);
   return (
     <motion.section

@@ -1,3 +1,4 @@
+import { AppDispatch } from './store';
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
@@ -33,21 +34,24 @@ export interface productState {
   designers: DesignerType;
 }
 
-export const fetchAllProducts = createAsyncThunk<IProduct[]>(
-  "products/fetchAllProducts",
-  async (_, { dispatch }) => {
+export type ThunkApiConfig = {
+  dispatch: AppDispatch,
+
+}
+
+export const fetchAllProducts = createAsyncThunk(
+  'products/fetchAllProducts',
+  async (_, { dispatch, rejectWithValue }) => {
     try {
-      const { data } = await axios.get(
-        `https://650464d5c8869921ae24f99f.mockapi.io/items`
-      );
+      const { data } = await axios.get('https://650464d5c8869921ae24f99f.mockapi.io/items');
       dispatch(setProducts(data));
       return data;
-    } catch (error) {
-      throw error;
+    } catch (error: any) {
+      return rejectWithValue(error.response.data); // Використовуйте rejectWithValue для передачі помилки
     }
   }
 );
-export const fetchAllCategories = createAsyncThunk<string[]>(
+export const fetchAllCategories = createAsyncThunk(
   "products/fetchAllCategories",
   async (_, { dispatch }) => {
     try {
@@ -66,20 +70,20 @@ export const fetchAllCategories = createAsyncThunk<string[]>(
   }
 );
 
-export const fetchProductsByCategories = createAsyncThunk<IProduct[], string>(
+export const fetchProductsByCategories = createAsyncThunk(
   "products/fetchProductsByCategories",
-  async (category, {dispatch}) => {
+  async (category: string, { dispatch, rejectWithValue }) => {
     try {
       const {data} = await axios.get(`https://650464d5c8869921ae24f99f.mockapi.io/items?category=${category}`)
       dispatch(setProducts(data))
       return data
-    } catch (error) {
-      throw error;      
+    } catch (error:any) {
+      rejectWithValue(error.response.data)   
     }
   }
 )
 
-export const fetchAllDesigners = createAsyncThunk<string[]>(
+export const fetchAllDesigners = createAsyncThunk(
   "products/fetchAllDesigners",
   async (_, { dispatch }) => {
     try {
@@ -98,9 +102,9 @@ export const fetchAllDesigners = createAsyncThunk<string[]>(
   }
 );
 
-export const fetchProductsByDesigner = createAsyncThunk<IProduct[], string>(
+export const fetchProductsByDesigner = createAsyncThunk(
   "products/fetchProductsByDesigner",
-  async (designer, {dispatch}) => {
+  async (designer: string, {dispatch}) => {
     try {
       const {data} = await axios.get(`https://650464d5c8869921ae24f99f.mockapi.io/items?brand=${designer}`);
     dispatch(setProducts(data));
@@ -111,9 +115,9 @@ export const fetchProductsByDesigner = createAsyncThunk<IProduct[], string>(
   }
 )
 
-export const fetchProductsBySex = createAsyncThunk<IProduct[], string>(
+export const fetchProductsBySex = createAsyncThunk(
   "products/fetchProductsBySex",
-  async (sex, { dispatch }) => {
+  async (sex: string, { dispatch }) => {
     try {
       const { data } = await axios.get(
         `https://650464d5c8869921ae24f99f.mockapi.io/items?sex=${sex}`

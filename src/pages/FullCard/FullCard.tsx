@@ -15,7 +15,7 @@ import {
   setOpenCart,
 } from "../../store/cartSlice";
 import {motion} from 'framer-motion'
-import Loader from "../../components/Burger/Loader/Loader";
+import Loader from "../../components/Loader/Loader";
 
 export interface IFullCard {
   id: string;
@@ -75,6 +75,7 @@ const FullCard = () => {
   }
 
   return (
+    
     <motion.section className={styles.fullCard}
     initial={{opacity: 0}}
     animate={{opacity: 1, transition: {duration: 0.7}} }

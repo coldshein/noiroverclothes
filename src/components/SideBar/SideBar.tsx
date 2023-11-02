@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 
 const SideBar = () => {
     const dispatch = useDispatch();
-    const {categories, designers} = useSelector((state:RootState) => state.products)
+    const {categories, designers} = useSelector((state:RootState) => state.rootReducer.products)
     React.useEffect(() =>{
         dispatch(fetchAllCategories() as any)
         dispatch(fetchAllDesigners() as any)
