@@ -68,6 +68,15 @@
     overflow-y: scroll;
     gap: 10px;
 }
+.info{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.total{
+    font-size: 18px;
+    text-transform: uppercase;
+}
 .btn{
     width: 100%;
     padding: 20px;

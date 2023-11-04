@@ -13,52 +13,53 @@ export type CartItemType = {
 export interface cartState {
   openCart: boolean;
   items: CartItemType[];
+  total: number;
 }
 
 const initialState: cartState = {
   openCart: false,
   items: [],
+  total: 0,
 };
 
-export const postCartItem = createAsyncThunk<CartItemType, CartItemType>(
+export const postCartItem = createAsyncThunk(
   "cartItems/postCartItem",
-  async (addedItem) => {
+  async (addedItem: CartItemType, {rejectWithValue}) => {
     try {
       const { data } = await axios.post(
         `https://650464d5c8869921ae24f99f.mockapi.io/cart`,
         addedItem
       );
-      console.log(data);
       return data;
-    } catch (error) {
-      throw error;
+    } catch (error: any) {
+      rejectWithValue(error.response.data);
     }
   }
 );
 
-export const fetchCartItems = createAsyncThunk<CartItemType>(
+export const fetchCartItems = createAsyncThunk(
   "cartItems/fetchCartItems",
-  async (_, { dispatch }) => {
+  async (_, { dispatch, rejectWithValue }) => {
     try {
       const { data } = await axios.get(
         `https://650464d5c8869921ae24f99f.mockapi.io/cart`
       );
       dispatch(setItems(data));
       return data;
-    } catch (error) {
-        throw error;
+    } catch (error: any) {
+      rejectWithValue(error.response.data);
     }
   }
 );
 
-export const removeCartItem = createAsyncThunk<string, string>(
+export const removeCartItem = createAsyncThunk(
     "cartItems/removeCartItem",
-    async (id) => {
+    async (id: string, { rejectWithValue}) => {
       try {
         const { data } = await axios.delete(`https://650464d5c8869921ae24f99f.mockapi.io/cart/${id}`);
         return data;
-      } catch (error) {
-        throw error;
+      } catch (error: any) {
+        rejectWithValue(error.response.data);
       }
     }
   );

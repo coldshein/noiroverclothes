@@ -2,18 +2,16 @@ import styles from "./Header.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import { setOpenCart } from "../../store/cartSlice";
-import { setOpenBurger } from "../../store/burgerSlice";
+import { setOpenBurger } from "../../store/menuSlice";
 import { Link } from "react-router-dom";
 const Header = () => {
   const dispatch = useDispatch();
   const openCart = useSelector((state: RootState) => state.rootReducer.cart.openCart);
-  const openBurger = useSelector((state: RootState) => state.rootReducer.burger.openBurger);
+  const openBurger = useSelector((state: RootState) => state.rootReducer.menu.openBurger);
   const handleBurger = () => {
     dispatch(setOpenBurger(!openBurger));
-    return () => {
-      dispatch(setOpenBurger(!false))
-    }
   };
+  
   return (
     <header>
       <div className={styles.inner}>

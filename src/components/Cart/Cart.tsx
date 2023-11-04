@@ -9,6 +9,7 @@ import EmptyCart from "../EmptyCart/EmptyCart";
 const Cart = () => {
   const dispatch = useDispatch();
   const { openCart, items } = useSelector((state: RootState) => state.rootReducer.cart);
+  const totalPrice = items.reduce((sum, item) => Number(sum) + Number(item.price), 0 )
 
   React.useEffect(() => {
     dispatch(fetchCartItems() as any);
@@ -30,7 +31,7 @@ const Cart = () => {
           <div className={styles.list}>
             {items.map((item) => (
               <CartItem
-                key={item.id}
+                key={item.id + item.title}
                 title={item.title}
                 price={item.price}
                 size={item.size}
@@ -39,7 +40,10 @@ const Cart = () => {
               />
             ))}
           </div>
+          <div className={styles.info}>
+            <span className={styles.total}>Total: {Number(totalPrice)}.00$</span>
           <button className={styles.btn}>checkout</button>
+          </div>
         </>
       ) : (
         <EmptyCart />
