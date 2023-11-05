@@ -14,12 +14,14 @@ export interface cartState {
   openCart: boolean;
   items: CartItemType[];
   total: number;
+  loading: "loading" | 'fulfilled' | "rejected";
 }
 
 const initialState: cartState = {
   openCart: false,
   items: [],
   total: 0,
+  loading: "loading"
 };
 
 export const postCartItem = createAsyncThunk(
@@ -39,12 +41,11 @@ export const postCartItem = createAsyncThunk(
 
 export const fetchCartItems = createAsyncThunk(
   "cartItems/fetchCartItems",
-  async (_, { dispatch, rejectWithValue }) => {
+  async (_, { rejectWithValue }) => {
     try {
       const { data } = await axios.get(
         `https://650464d5c8869921ae24f99f.mockapi.io/cart`
       );
-      dispatch(setItems(data));
       return data;
     } catch (error: any) {
       rejectWithValue(error.response.data);
@@ -80,6 +81,16 @@ export const cartSlice = createSlice({
     addItem: (state, action: PayloadAction<CartItemType>) => {
       state.items.push(action.payload);
     },
+  },
+  extraReducers(builder) {
+    builder.addCase(fetchCartItems.pending, (state) =>{
+      state.loading = "loading";
+      state.items = [];
+    }),
+    builder.addCase(fetchCartItems.fulfilled, (state, action) => {
+      state.loading = 'fulfilled';
+      state.items = action.payload
+    } )
   },
 });
 

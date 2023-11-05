@@ -46,6 +46,7 @@ const FullCard = () => {
     } catch (error) {}
   };
   React.useEffect(() => {
+    window.scrollTo(0, 0);
     fetchOneProduct(id);
   }, []);
   const addToCart = () => {

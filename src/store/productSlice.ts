@@ -41,10 +41,9 @@ export type ThunkApiConfig = {
 
 export const fetchAllProducts = createAsyncThunk(
   'products/fetchAllProducts',
-  async (_, { dispatch, rejectWithValue }) => {
+  async (_, { rejectWithValue }) => {
     try {
       const { data } = await axios.get('https://650464d5c8869921ae24f99f.mockapi.io/items');
-      dispatch(setProducts(data));
       return data;
     } catch (error: any) {
       return rejectWithValue(error.response.data); // Використовуйте rejectWithValue для передачі помилки
@@ -53,7 +52,7 @@ export const fetchAllProducts = createAsyncThunk(
 );
 export const fetchAllCategories = createAsyncThunk(
   "products/fetchAllCategories",
-  async (_, { dispatch }) => {
+  async () => {
     try {
       const { data } = await axios.get(
         `https://650464d5c8869921ae24f99f.mockapi.io/items`
@@ -62,7 +61,6 @@ export const fetchAllCategories = createAsyncThunk(
         data.map((item: IProduct) => item.category)
       );
       const categories = Array.from(category);
-      dispatch(setCategories(categories));
       return categories;
     } catch (error) {
       throw error;
@@ -72,10 +70,9 @@ export const fetchAllCategories = createAsyncThunk(
 
 export const fetchProductsByCategories = createAsyncThunk(
   "products/fetchProductsByCategories",
-  async (category: string, { dispatch, rejectWithValue }) => {
+  async (category: string, { rejectWithValue }) => {
     try {
       const {data} = await axios.get(`https://650464d5c8869921ae24f99f.mockapi.io/items?category=${category}`)
-      dispatch(setProducts(data))
       return data
     } catch (error:any) {
       rejectWithValue(error.response.data)   
@@ -85,7 +82,7 @@ export const fetchProductsByCategories = createAsyncThunk(
 
 export const fetchAllDesigners = createAsyncThunk(
   "products/fetchAllDesigners",
-  async (_, { dispatch }) => {
+  async () => {
     try {
       const { data } = await axios.get(
         `https://650464d5c8869921ae24f99f.mockapi.io/items`
@@ -94,7 +91,6 @@ export const fetchAllDesigners = createAsyncThunk(
         data.map((item: IProduct) => item.brand)
       );
       const designers = Array.from(designer);
-      dispatch(setDesigners(designers))
       return designers;
     } catch (error) {
       throw error;
@@ -104,10 +100,9 @@ export const fetchAllDesigners = createAsyncThunk(
 
 export const fetchProductsByDesigner = createAsyncThunk(
   "products/fetchProductsByDesigner",
-  async (designer: string, {dispatch}) => {
+  async (designer: string) => {
     try {
       const {data} = await axios.get(`https://650464d5c8869921ae24f99f.mockapi.io/items?brand=${designer}`);
-    dispatch(setProducts(data));
     return data;
     } catch (error) {
       throw error;
@@ -117,12 +112,11 @@ export const fetchProductsByDesigner = createAsyncThunk(
 
 export const fetchProductsBySex = createAsyncThunk(
   "products/fetchProductsBySex",
-  async (sex: string, { dispatch }) => {
+  async (sex: string) => {
     try {
       const { data } = await axios.get(
         `https://650464d5c8869921ae24f99f.mockapi.io/items?sex=${sex}`
       );
-      dispatch(setProducts(data));
       return data;
     } catch (error) {
       console.error(error);
@@ -150,12 +144,6 @@ export const productSlice = createSlice({
   name: "products",
   initialState,
   reducers: {
-    setProducts: (state, action: PayloadAction<IProduct[]>) => {
-      state.products.items = action.payload;
-    },
-    setCategories: (state, action: PayloadAction<string[]>) => {
-      state.categories.items = action.payload;
-    },
     setDesigners: (state, action: PayloadAction<string[]>) => {
       state.designers.items = action.payload;
     },
@@ -168,6 +156,14 @@ export const productSlice = createSlice({
     builder.addCase(fetchAllDesigners.fulfilled, (state,action) => {
       state.designers.items = action.payload;
       state.designers.loading = 'fulfilled';
+    }),
+    builder.addCase(fetchAllCategories.pending, (state) => {
+      state.categories.items = [];
+      state.categories.loading = 'fulfilled';
+    }),
+    builder.addCase(fetchAllCategories.fulfilled, (state,action) => {
+      state.categories.items = action.payload;
+      state.categories.loading = 'fulfilled';
     }),
     builder.addCase(fetchAllProducts.pending, (state) => {
       state.products.items = [];
@@ -196,5 +192,5 @@ export const productSlice = createSlice({
   }
 });
 
-export const { setProducts, setCategories, setDesigners } = productSlice.actions;
+export const { setDesigners } = productSlice.actions;
 export default productSlice.reducer;
